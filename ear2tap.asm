@@ -6,17 +6,18 @@ F_WRITE equ     $9E
         org     8192
         ld      a, h
         or      l
-        jr      nz, Lab8202
+        jr      nz, StartProcessing
 
         ld      hl, Usage
-BucPrintMsg:
+PrintMsgLoop:
         ld      a, (hl)
         or      a
         ret     z
         rst     10h
         inc     hl
-        jr      BucPrintMsg
-Lab8202:
+        jr      PrintMsgLoop
+
+StartProcessing:
         call    getFileName
         ld      hl, buffer
         ld      a, 42
